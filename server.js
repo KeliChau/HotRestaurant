@@ -70,7 +70,7 @@ app.get("/api/waitlist", function(req, res) {});
 
 //reserve route post
 app.post("/reserve", function(req, res) {
-  res.sendFile(path.join(__dirname, "book.html"));
+
 });
 
 // Starts the server to begin listening
