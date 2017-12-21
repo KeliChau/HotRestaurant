@@ -13,34 +13,10 @@ var PORT = process.env.PORT || 3000;
 //dummy
 var tables = [
   {
-    customerName: "Ahmed",
-    customerEmail: "afhaque89@gmail.com",
-    customerID: "afhaque89",
-    phoneNumber: "979-587-0887"
-  },
-  {
-    customerName: "John Liscar",
-    phoneNumber: "7065706063",
-    customerEmail: "john.liscar@gmail.com",
-    customerID: ""
-  },
-  {
-    customerName: "Austin Branham",
-    phoneNumber: "7708837281",
-    customerEmail: "austinhb1993@gmail.com",
-    customerID: ""
-  },
-  {
-    customerName: "Rick James",
-    phoneNumber: "555 555 5555",
-    customerEmail: "rickjames@rickjames.com",
-    customerID: ""
-  },
-  {
-    customerName: "Miki",
-    phoneNumber: "555-555-5555",
-    customerEmail: "miki@gmail.com",
-    customerID: "miki3"
+    customerName: "Corey Sullivan",
+    phoneNumber: "6508880054",
+    customerEmail: "thisusernameisnottaken@gmail.com",
+    customerID: "asljkfhaksdjgajf"
   }
 ];
 
@@ -57,24 +33,42 @@ app.get("/", function(req, res) {
 
 //tables route
 app.get("/table", function(req, res) {
-  res.sendFile(path.join(__dirname, "table.html"));
+  res.sendFile(path.join(__dirname, "view.html"));
 });
 
 /* API ROUTES
 ***************/
 //api/tables
+
 app.get("/api/tables", function(req, res) {
-  res.json(tables);
+  var apiTable =[];
+  for (var i = 0; i < 5; i++) {
+    apiTable.push(tables[i]);
+  }
+
+  res.json(apiTable);
 });
 
 //api/waitList
 app.get("/api/waitlist", function(req, res) {
+  var apiWait =[];
+  for (var i = 5; i < tables.length; i++) {
+    apiWait.push(tables[i]);
+  }
 
+  res.json(apiWait);
 });
 
 //
 app.post("/api/new", function(req, res) {
+  var newReserve = req.body;
 
+  tables.push(newReserve);
+
+  res.status(201).json(newReserve);
+
+  res.sendFile(path.join(__dirname, "view.html"));
+  
 });
 
 // Starts the server to begin listening
