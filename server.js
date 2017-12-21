@@ -32,7 +32,12 @@ app.get("/", function(req, res) {
 });
 
 //tables route
-app.get("/table", function(req, res) {
+app.get("/book.html", function(req, res) {
+  res.sendFile(path.join(__dirname, "book.html"));
+});
+
+//tables route
+app.get("/view.html", function(req, res) {
   res.sendFile(path.join(__dirname, "view.html"));
 });
 
