@@ -60,16 +60,20 @@ app.get("/table", function(req, res) {
   res.sendFile(path.join(__dirname, "table.html"));
 });
 
+/* API ROUTES
+***************/
 //api/tables
 app.get("/api/tables", function(req, res) {
   res.json(tables);
 });
 
 //api/waitList
-app.get("/api/waitlist", function(req, res) {});
+app.get("/api/waitlist", function(req, res) {
 
-//reserve route post
-app.post("/reserve", function(req, res) {
+});
+
+//
+app.post("/api/new", function(req, res) {
 
 });
 
