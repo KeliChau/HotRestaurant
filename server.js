@@ -2,6 +2,7 @@
 // =============================================================
 var express = require("express");
 var bodyParser = require("body-parser");
+// var clientJS = require('./index.js');
 //Built in
 var path = require("path");
 
@@ -16,13 +17,19 @@ var tables = [
     customerName: "Corey Sullivan",
     phoneNumber: "6508880054",
     customerEmail: "thisusernameisnottaken@gmail.com",
-    customerID: "asljkfhaksdjgajf"
+    resName: "Corey Sullivan"
   }
 ];
+var waitlist = [];
+
+// var apiTable =[];
+// var apiWait =[];
+
 
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static(__dirname));
 
 //Routes
 //home route
@@ -32,12 +39,12 @@ app.get("/", function(req, res) {
 });
 
 //tables route
-app.get("/book.html", function(req, res) {
+app.get("/book", function(req, res) {
   res.sendFile(path.join(__dirname, "book.html"));
 });
 
 //tables route
-app.get("/view.html", function(req, res) {
+app.get("/view", function(req, res) {
   res.sendFile(path.join(__dirname, "view.html"));
 });
 
@@ -46,33 +53,35 @@ app.get("/view.html", function(req, res) {
 //api/tables
 
 app.get("/api/tables", function(req, res) {
-  var apiTable =[];
-  for (var i = 0; i < 5; i++) {
-    apiTable.push(tables[i]);
-  }
+  // for (var i = 0; i < tables.length; i++) {
+  //   waitlist.push(tables[i]);
+  // }
 
-  res.json(apiTable);
+   return res.json(tables);
+
 });
 
 //api/waitList
 app.get("/api/waitlist", function(req, res) {
-  var apiWait =[];
-  for (var i = 5; i < tables.length; i++) {
-    apiWait.push(tables[i]);
-  }
+  // for (var i = 5; i < tables.length; i++) {
+  //   waitlist.push(tables[i]);
+  // }
 
-  res.json(apiWait);
+  return res.json(waitlist);
 });
 
 //
 app.post("/api/new", function(req, res) {
   var newReserve = req.body;
-
-  tables.push(newReserve);
+  if(tables.length == 5){
+    waitlist.push(newReserve);
+  }else{
+    tables.push(newReserve);
+  }
 
   res.status(201).json(newReserve);
 
-  res.sendFile(path.join(__dirname, "view.html"));
+  // res.sendFile(path.join(__dirname, "view.html"));
   
 });
 
